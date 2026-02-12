@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetScope — Network Monitor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">Net<span>Scope</span></div>
+            <span id="status-badge" class="status-badge offline">
+                <span class="status-dot"></span> Connecting
+            </span>
+        </div>
+        <div class="header-right">
+            <span class="packet-count">
+                Packets: <strong id="packet-count">—</strong>
+            </span>
+        </div>
+    </header>
+
+    <!-- Stats Overview -->
+    <section class="stats-bar">
+        <div class="stat-card">
+            <div class="stat-label">Total Devices</div>
+            <div class="stat-value" id="stat-total-devices">0</div>
+            <div class="stat-sub">All time discovered</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Online Now</div>
+            <div class="stat-value" id="stat-online-devices">0</div>
+            <div class="stat-sub">Currently active</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Data Sent</div>
+            <div class="stat-value" id="stat-total-sent">0 B</div>
+            <div class="stat-sub" id="stat-top-device">—</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">Data Received</div>
+            <div class="stat-value" id="stat-total-recv">0 B</div>
+            <div class="stat-sub">Total inbound</div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Device List -->
+        <section>
+            <div class="toolbar">
+                <input
+                    type="text"
+                    id="search-input"
+                    class="search-input"
+                    placeholder="Search by hostname, IP, MAC, or vendor..."
+                >
+                <button id="filter-online-btn" class="filter-btn">Online Only</button>
+            </div>
+            <div id="device-list" class="device-list">
+                <div class="empty-state">
+                    <h3>Waiting for devices</h3>
+                    <p>NetScope is listening for network traffic...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="chart-panel">
+                <div class="chart-title">Network Throughput</div>
+                <div class="chart-container">
+                    <canvas id="bandwidth-chart"></canvas>
+                </div>
+            </div>
+
+            <div class="top-devices-panel">
+                <div class="chart-title">Top Devices by Traffic</div>
+                <div id="top-devices-list">
+                    <div class="empty-state"><p>No device data yet</p></div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
